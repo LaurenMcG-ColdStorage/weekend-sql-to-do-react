@@ -4,11 +4,11 @@ const pool = require('../modules/pool.js');
 
 // GET
 router.get('/', (req, res) => {
-    const dbQuery = `SELECT * FROM "todo" ORDER BY "priority" DESC`
+    const dbQuery = `SELECT * FROM "todo" ORDER BY "priority" DESC;`
     pool
     .query((dbQuery))
     .then((result) => {
-        console.log('Successfully queried DB: ', result);
+        console.log('Successfully queried DB:');
         res.send(result.rows);
     })
     .catch((error) => {

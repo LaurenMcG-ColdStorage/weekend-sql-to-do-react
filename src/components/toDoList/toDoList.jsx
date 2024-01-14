@@ -2,28 +2,33 @@ import { useState, useEffect } from 'react';
 import { getToDoList } from '../../../server/todoApi/todoApi';
 
 function BuildTodoList(){
-    const [todoList, setTodoList] = useState();
+    const [todoList, setTodoList] = useState([]);
+    
+    function refreshPage(){
+        const getTodo = getToDoList();
+        getTodo
+        .then((response) => {
+            console.log(response);
+            setTodoList(response.data)
+        })
+        .catch((error) => {
+            console.error(error);
+            res.sendStatus(500);
+        })
+    }
+    
     
     useEffect(() => {
         console.log('useEffect start');
-    
-        const todoCall = getToDoList();
-        todoCall
-        .then((response) => {
-          setTodoList(response.data)
-        })
-        .catch((error) => {
-          console.error(error);
-          res.sendStatus(500);
-        })
-      }, []);
+        refreshPage()
+   }, []);
     
     return (
-        <section>
+        <div>
             <table>
                 <thead>
                     <th>What Needs Done?</th>
-                    <th>How Important Is It?</th>
+                    <th>When Is It Due?</th>
                 </thead>
                 <tbody>
                     {todoList.map(listData => {
@@ -32,12 +37,12 @@ function BuildTodoList(){
                                 <td>{listData.note}</td>
                                 <td>{listData.priority}</td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
-        </section>
-    );
+        </div>
+    )
 };
 
 export default BuildTodoList;

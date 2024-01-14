@@ -1,5 +1,3 @@
-import {useState, useEffect} from 'react';
-import { getToDoList } from '../../../server/todoApi/todoApi'
 import CollectTodoItem from '../toDoForm/toDoForm';
 import BuildTodoList from '../toDoList/toDoList';
 
@@ -13,6 +11,6 @@ function App () {
     </div>
   );
 
-}
+};
 
-export default App
+export default App;
