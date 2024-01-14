@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { getToDoList } from '../../todoApi/todoApi'
+import { getToDoList } from '../../../server/todoApi/todoApi'
 
 function App () {
   const [toDoList, setToDoList] = useState();
@@ -14,9 +14,10 @@ function App () {
     })
     .catch((error) => {
       console.error(error);
-      resizeBy.sendStatus(500);
+      res.sendStatus(500);
     })
-  })
+  }, [])
+  
   return (
     <div>
       <h1>TO DO APP</h1>
