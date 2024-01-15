@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { postToDoList } from '../../../server/todoApi/todoApi';
 
 function CollectTodoItem(props){
@@ -6,16 +6,18 @@ function CollectTodoItem(props){
     const [todoPriority, setTodoPriority] = useState();
 
     function handleTodoRequest(){
-        const postToDo = postToDoList();
         setTodoNote(document.querySelector('.todo_Note').value);
         setTodoPriority(document.getElementById('todo_Priority').value);
+        console.log(todoPriority);
+        console.log(todoNote);
 
-        postToDo({
+
+        postToDoList({
             note: todoNote,
-            priority: todoPriority,
-        })
+            priority: todoPriority
+    })
         .then((response) => {
-            props.todoRefreshCallback(response.data)
+
         })
         .catch((error) => {
             console.error(error);
@@ -29,9 +31,9 @@ function CollectTodoItem(props){
             <input className='todo_Note' type='text' placeholder='Enter note' required/>
             <select id='todo_Priority' value={todoPriority} onChange={(e) => setTodoPriority(e.target.value)}>
                 <option value='Urgent'>Urgent</option>
-                <option value='pretty_Important'>Pretty Important</option>
+                <option value='Pretty_Important'>Pretty Important</option>
                 <option value='Eventually'>Eventually</option>
-                <option value='probably_Never' selected>Probably Never</option>
+                <option value='probably_Never'>Probably Never</option>
             </select>
             <button type='submit' onClick={handleTodoRequest}>Send It</button>
         </div>

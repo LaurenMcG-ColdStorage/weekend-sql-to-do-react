@@ -19,7 +19,20 @@ router.get('/', (req, res) => {
 
 
 // POST
-
+router.post('/', (req, res) => {
+    const note = [req.body.note, req.body.priority];
+    const queryText = `INSERT INTO "todo" ("note", "priority") VALUES ($1, $2);`
+    pool
+    .query(queryText, note)
+    .then((result) => {
+        console.log('Added note to database', note);
+        res.sendStatus(201);
+    })
+    .catch((error) => {
+        console.error('Note append failed', error);
+        res.sendStatus(500)
+    })
+})
 // PUT
 
 // DELETE

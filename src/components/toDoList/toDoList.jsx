@@ -27,8 +27,10 @@ function BuildTodoList(){
         <div>
             <table>
                 <thead>
-                    <th>What Needs Done?</th>
-                    <th>When Is It Due?</th>
+                    <tr>
+                        <th>What Needs Done?</th>
+                        <th>When Is It Due?</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {todoList.map(listData => {
