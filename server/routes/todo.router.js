@@ -36,5 +36,18 @@ router.post('/', (req, res) => {
 // PUT
 
 // DELETE
+router.delete('/:id', (req, res) => {
+    const removeNote = req.params.id;
+    const queryText = `DELETE FROM "todo" WHERE "id" = $1;`
+    pool
+    .query(queryText, removeNote)
+    .then((result) => {
+        console.log('Note Deleted');
+    })
+    .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+    })
+})
 
 module.exports = router;

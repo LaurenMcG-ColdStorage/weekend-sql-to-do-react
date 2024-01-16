@@ -1,29 +1,17 @@
+import {useState, useEffect } from 'react';
 import CollectTodoItem from '../toDoForm/toDoForm';
 import BuildTodoList from '../toDoList/toDoList';
+import './App.css';
+
 
 function App () {
 
-  function refreshPage(){
-    const getTodo = getToDoList();
-    getTodo
-    .then((response) => {
-        //console.log(response);
-        setTodoList(response.data)
-    })
-    .catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-    });
-  };
-
   return (
     <div>
-      <h1>TO DO APP</h1>
-      <CollectTodoItem todoRefreshCallback={refreshPage}/>
+      <h1 className='App-header'>TO DO APP</h1>
+      <CollectTodoItem CollectTodoItemCallback={BuildTodoList}/>
       <BuildTodoList />
     </div>
-  );
-x
+  )
 };
-
 export default App;

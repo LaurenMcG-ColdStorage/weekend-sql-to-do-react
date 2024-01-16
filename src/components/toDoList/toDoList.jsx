@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 import { getToDoList } from '../../../server/todoApi/todoApi';
+import CollectTodoItem from '../toDoForm/toDoForm';
+import './toDoList.css';
 
 function BuildTodoList(){
     const [todoList, setTodoList] = useState([]);
     
     function refreshPage(){
-        const getTodo = getToDoList();
-        getTodo
+        getToDoList()
         .then((response) => {
-            console.log(response);
+            //console.log(response);
             setTodoList(response.data)
         })
         .catch((error) => {
             console.error(error);
-            res.sendStatus(500);
         })
     }
     
@@ -25,7 +25,7 @@ function BuildTodoList(){
     
     return (
         <div>
-            <table>
+            <table className='TodoFormat'>
                 <thead>
                     <tr>
                         <th>What Needs Done?</th>
@@ -35,7 +35,7 @@ function BuildTodoList(){
                 <tbody>
                     {todoList.map(listData => {
                         return (
-                            <tr key={listData.id}>
+                            <tr key={listData.id} className='TodoItem'>
                                 <td>{listData.note}</td>
                                 <td>{listData.priority}</td>
                             </tr>
