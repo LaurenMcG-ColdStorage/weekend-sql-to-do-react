@@ -12,10 +12,10 @@ export const postToDoList = (todoData) => {
 
 export const changeToDoList = (toDoUpdate) => {
     //Axios put call
-    return axios.put('/api/todo', toDoUpdate);
+    return axios.put(`/api/todo/${toDoUpdate}`);
 };
 
-export const toDoItemDelete = (deleteData) => {
+export const toDoItemDelete = (todoDelete) => {
     //Axios delete call
-    return axios.put('/api/todo/:id', deleteData);
+    return axios.delete(`/api/todo/${todoDelete}`);
 };

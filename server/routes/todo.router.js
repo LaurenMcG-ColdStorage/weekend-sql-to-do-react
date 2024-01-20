@@ -4,7 +4,7 @@ const pool = require('../modules/pool.js');
 
 // GET
 router.get('/', (req, res) => {
-    const dbQuery = `SELECT * FROM "todo" ORDER BY "priority" DESC;`
+    const dbQuery = `SELECT * FROM "todo" ORDER BY "priority" DESC, "complete" DESC;`
     pool
     .query((dbQuery))
     .then((result) => {
@@ -34,15 +34,28 @@ router.post('/', (req, res) => {
     })
 })
 // PUT
+router.put('/:id', (req, res) => {
+    const updateNote = req.params.id;
+    const queryText = `UPDATE "todo" SET "complete" = NOT "complete" WHERE "id" = $1;`;
+    pool
+    .query(queryText, [updateNote])
+    .then((result) => {
+        res.sendStatus(201);
+    })
+    .catch((error) => {
+        res.sendStatus(500);
+    })
+})
 
 // DELETE
 router.delete('/:id', (req, res) => {
     const removeNote = req.params.id;
     const queryText = `DELETE FROM "todo" WHERE "id" = $1;`
     pool
-    .query(queryText, removeNote)
+    .query(queryText, [removeNote])
     .then((result) => {
         console.log('Note Deleted');
+        res.sendStatus(201);
     })
     .catch((error) => {
         console.error(error);
