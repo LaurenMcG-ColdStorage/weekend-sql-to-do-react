@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import CollectTodoItem from '../toDoForm/toDoForm';
 import BuildTodoList from '../toDoList/toDoList';
-//import UpdateTodo from '../ToDoUpdate/ToDoUpdate';
-//import DeleteTodo from '../TodoDelete/TodoDelete';
+import Header from '../Header/Header';
 import { getToDoList } from '../../../server/todoApi/todoApi';
 import './App.css';
 import Grid from '@mui/material/Grid';
@@ -26,8 +25,8 @@ function App (){
   }, [])
 
   return (
-    <div>
-      <h1>TO DO APP</h1>
+    <div className='App'>
+      <Header />
       <CollectTodoItem CollectTodoItemCallback={refreshPage}/>
       <BuildTodoList todoList={todoList} 
                      RefreshTodoCallback={refreshPage}/>
