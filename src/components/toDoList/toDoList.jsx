@@ -33,7 +33,7 @@ function BuildTodoList({todoList, RefreshTodoCallback}){
             <Grid container spacing={2} className='TodoFormat' alignItems='center'>
             {todoList.map(listData => {
                 return(
-                <Grid item key={listData.id} xs={10} sm={10} md={10} lg={10}>
+                <Grid item key={listData.id} xs={12} sm={12} md={12} lg={12}>
                     <Box sx={{borderRadius: '15px', margin: '5px', padding: '5px'}} 
                          className={`${listData.complete ? 'TodoItem complete' : 'TodoItem incomplete'}`}>
                         <Grid container className='itemSpan'>
